@@ -1,0 +1,94 @@
+<div  fxLayout="row" 
+fxLayout.xs="column"
+fxLayout.sm="column"
+fxLayoutAlign="start baseline"
+fxLayoutGap="20px">
+
+<div [hidden]="shops">
+  <mat-spinner color="warn"></mat-spinner><h4>Chargement . . . Veuillez Patienter</h4>
+</div>
+<div fxFlex="70%">
+    <h3 > Votre Panier</h3>
+    <div>Time: {{ time | async }}</div>
+    <hr>
+    
+
+<mat-grid-list cols="1" rowHeight="250px" colHeight="200px" *ngIf="shops ; else loading">
+    
+  <mat-grid-tile
+  *ngFor="let shop of shops"
+      [colspan]="1"
+      [rowspan]="1" >
+   
+  <mat-card style= "width: 100%" [@expand] class="example-card" >
+   
+    <mat-card-header>
+        
+
+   <mat-card-title style="font-size: 15px"> produit: {{shop.designation}}</mat-card-title>
+   
+    
+      <mat-card-title style="font-size: 15px"> Description: {{shop.description}}</mat-card-title>
+      
+      <mat-card-title style="font-size: 15px"> Prix: {{shop.price}} Euros</mat-card-title>
+       
+    
+    <span class="flex-spacer"></span>
+  
+<div fxLayout="column" 
+    fxLayout.xs="column"
+    fxLayout.sm="column"
+    fxLayoutAlign="start baseline"
+    fxLayoutGap="20px">
+   
+    <div fxFlex >
+
+    <a mat-button (click)='deleteItem(shop.id)'>Supprimer</a>
+       
+      </div>
+    </div>
+  
+    
+  </mat-card-header>
+  
+ 
+  </mat-card>
+ 
+
+  </mat-grid-tile>
+</mat-grid-list>
+
+<ng-template #loading>
+    Loading stuff...
+  </ng-template>
+
+</div>
+
+<div fxFlex="30%" >
+  <h3>Total</h3>
+  <hr>
+  <mat-card style="width: 450px">
+    <mat-card-header>
+      <mat-card-title>
+       
+      </mat-card-title>
+      <mat-card-subtitle>
+        Nombre produits: {{shops.length}}
+      </mat-card-subtitle>
+
+      <p>Total : {{this.total}}</p>
+    </mat-card-header>
+    <div fxFlex >
+
+      <a mat-button (click)='deleteShop()'>Supprimer</a>
+         
+      </div>
+    <mat-card-content >
+     <span color="primary" ><a mat-button (click)="passerCommande()">passer commande</a> </span> 
+    </mat-card-content>
+  </mat-card>
+
+
+</div>
+
+</div>

@@ -1,0 +1,36 @@
+<div >
+ 
+  <div *ngIf='categorie'>
+ <a  [routerLink]="[ '/categories'  ]" routerLinkActive="active"> Categories</a> > {{categorie.nom}}
+</div>
+<hr>
+<br>
+<br>
+</div>
+<div fxLayout="wrap row" 
+fxLayout.xs="column"
+fxLayout.sm="column"
+fxLayoutAlign="start center end"
+fxLayoutGap="20px"
+>
+
+
+<div [hidden]="products">
+    <mat-spinner color="warn"></mat-spinner>
+    <h4>Chargement . . . Veuillez Patienter</h4>
+  </div>
+<mat-card class="example-card" *ngFor='let product of products'  appHighlight [routerLink]="[ '/product', product.id ]" [@expand]>
+  <mat-card-header>
+  
+    <mat-card-title>{{product.designation}}</mat-card-title>
+    <p>prix {{product.price}}</p>
+  </mat-card-header>
+     
+ 
+  
+</mat-card>
+
+
+
+
+</div>

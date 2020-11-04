@@ -1,0 +1,65 @@
+<mat-card-header>
+  <mat-card-title>
+    <h2>Modifier Produit</h2>
+  </mat-card-title>
+</mat-card-header>
+
+<mat-card>
+  <form #formcat="ngForm" novalidate (ngSubmit)="UpdateProduit()">
+    <mat-dialog-content>
+      <mat-form-field style="width: 100%">
+        <input
+          matInput
+          placeholder="libele"
+          #libele="ngModel"
+          [(ngModel)]="produit.designation"
+          name="libele"
+          required
+        />
+        <mat-error *ngIf="libele?.errors?.required" >
+          libele est un champ obligatoire
+
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field style="width: 100%">
+        <input
+          matInput
+          placeholder="prix"
+          #prix="ngModel"
+          [(ngModel)]="produit.price"
+          name="prix"
+          required
+        />
+        <mat-error *ngIf="prix?.errors?.required"
+          >prix est un champ obligatoire</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field style="width: 100%">
+        <input
+          matInput
+          placeholder="description"
+          #libele="ngModel"
+          [(ngModel)]="produit.description"
+          name="description"
+          required
+        />
+        <mat-error *ngIf="libele?.errors?.required">
+          description est un champ obligatoire </mat-error>
+        </mat-form-field>
+
+     
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button mat-button type="submit " [disabled]="formcat.form.invalid">
+        Modifier produit
+      </button>
+
+      <button mat-button mat-dialog-close>
+        Annuler
+      </button>
+    </mat-dialog-actions>
+  </form>
+</mat-card>

@@ -1,0 +1,49 @@
+
+<div class="carousel" style="width: 100%">
+  <ngb-carousel>
+    <ng-template ngbSlide>
+      <img src="./assets/1.jpg" alt="Random first slide">
+    </ng-template>
+    <ng-template ngbSlide>
+      <img src="./assets/2.jpg" alt="Random second slide">
+    </ng-template>
+    <ng-template ngbSlide>
+      <img src="./assets/3.jpg" alt="Random third slide">
+    </ng-template>
+    <ng-template ngbSlide>
+      <img src="./assets/4.jpg" alt="Random second slide">
+    </ng-template>
+  </ngb-carousel>
+
+ </div>
+
+
+
+
+<div fxLayout="wrap row" 
+fxLayout.xs="column"
+fxLayout.sm="column"
+fxLayoutAlign="center"
+fxLayoutGap="20px"
+>
+
+
+
+
+<div [hidden]="Categories">
+  <mat-spinner color="warn"></mat-spinner><h4>Chargement . . . Veuillez Patienter</h4>
+</div>
+<mat-card class="example-card" *ngFor='let categorie of Categories'  appHighlight [routerLink]="[ '/products', categorie.id ]" [@expand]>
+  <mat-card-header>
+  
+    <mat-card-title>{{categorie.categoryName}}</mat-card-title>
+   
+  </mat-card-header>
+     
+  <mat-card-content>
+   
+  </mat-card-content>
+  
+</mat-card>
+
+</div>

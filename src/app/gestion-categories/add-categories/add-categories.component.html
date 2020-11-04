@@ -1,0 +1,50 @@
+<mat-card-header>
+  <mat-card-title>
+    <h2>Ajouter Categorie</h2>
+  </mat-card-title>
+</mat-card-header>
+
+<mat-card>
+  <form #formCategorie="ngForm" novalidate (ngSubmit)="addCategorie()">
+    <mat-dialog-content>
+      <mat-form-field style="width: 100%">
+        <input
+          matInput
+          placeholder="Nom"
+          #libele="ngModel"
+          [(ngModel)]="categorie.categoryName"
+          name="libele"
+          required
+        />
+        <mat-error *ngIf="libele?.errors?.required"
+          >libele est un Champ obligatoire</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field style="width: 100%">
+        <input
+          matInput
+          placeholder="Description"
+          #libele="ngModel"
+          [(ngModel)]="categorie.description"
+          name="libele"
+          required
+        />
+        <mat-error *ngIf="libele?.errors?.required"
+          >libele est un Champ obligatoire</mat-error
+        >
+      </mat-form-field>
+      
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button mat-button type="submit"  [disabled]="formCategorie.form.invalid">
+        Ajouter categorie
+      </button>
+
+      <button mat-button mat-dialog-close>
+        Annuler
+      </button>
+    </mat-dialog-actions>
+  </form>
+</mat-card>

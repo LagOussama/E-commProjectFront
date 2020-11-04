@@ -1,0 +1,95 @@
+
+<div >
+  <div *ngIf='categorie'>
+    <a  [routerLink]="[ '/categories'  ]" routerLinkActive="active"> Categories</a> > 
+    <a  [routerLink]="[ '/products' , categorie.id_catalogie ]" routerLinkActive="active"> {{categorie.designation}}</a> 
+    > {{product.nom}}
+  </div>
+</div>
+<div  fxLayout="row"
+fxLayout.xs="column"
+fxLayout.sm="column"
+fxLayoutAlign="space-around none"
+fxLayoutGap="20px">
+  
+    <div fxFlex="70%" style="float:left;">
+        <mat-card class="example-card" *ngIf='product'>
+          <div  fxLayout="row"
+                fxLayout.xs="column"
+                fxLayout.sm="column"
+                fxLayoutAlign="space-around none"
+                fxLayoutGap="20px">
+                
+                <div fxFlex="30%">
+      
+                  <mat-card-header>
+                    <mat-card-title class="example-card-title" style="font-size: 20px">{{product.designation}}</mat-card-title>
+                    <mat-card-subtitle></mat-card-subtitle>
+                  </mat-card-header>
+      
+                  
+                </div>
+          
+      
+                <div fxFlex="70%" >
+                  <div  fxLayout="column"
+                        fxLayout.xs="column"
+                        fxLayout.sm="column"
+                        fxLayoutAlign="space-around none"
+                        fxLayoutGap="20px">
+                    <div fxFlex="70%">
+                      <mat-card-content class="example-card-content">
+                        <h2>Description</h2>
+                        <p>{{product.description}}</p>
+                      </mat-card-content>
+                    </div> 
+                    <div fxFlex="30%" >
+                      <div  fxLayout="column"
+                        fxLayout.xs="column"
+                        fxLayout.sm="column"
+                        fxLayoutAlign="space-around none"
+                        fxLayoutGap="20px">
+                        <div fxLayoutAlign="start start">
+                          <i class="fas fa-tag fa-2x">&nbsp;&nbsp;</i>
+                          <span class="price">{{product.price}} Euros</span>
+                        </div>
+                        <div fxLayoutAlign="end end">
+                          <mat-card-actions>
+                            <button mat-button (click)="AddQT(product)"><i class="fas fa-cart-plus fa-5x" ></i></button>
+                          </mat-card-actions>
+                        </div>
+                      </div> 
+                    </div>
+                </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+      
+      <div fxFlex="30%" style="float:right;">
+        <mat-card class="other-items">
+          Same Category
+          <cdk-virtual-scroll-viewport itemSize="150" style="height: 500px"> 
+            <div *cdkVirtualFor="let produit of products" >
+              <mat-card [routerLink]="[ '/product', produit.id ]">
+                  <div  fxLayout="row"
+                        fxLayout.xs="column"
+                        fxLayout.sm="column"
+                        fxLayoutAlign="space-around none"
+                        fxLayoutGap="20px">
+                    <div>
+                      
+                    </div>
+                    <div>
+                      <span>{{produit.price}} Euros</span> 
+                    </div>
+                    <div>
+                      <span>{{produit.designation}}</span> 
+                    </div>
+                  </div>
+              </mat-card>
+            </div>
+          </cdk-virtual-scroll-viewport>
+        </mat-card>
+      </div>      
+</div>

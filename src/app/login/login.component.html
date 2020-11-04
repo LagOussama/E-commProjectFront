@@ -1,0 +1,32 @@
+
+
+<form novalidate #loginform="ngForm" (ngSubmit)='login()'>
+
+    <mat-dialog-content > 
+      <p>
+        <mat-form-field > 
+            <input matInput name="username" #username="ngModel"  placeholder="Adresse e-mail" [(ngModel)]="user.email" required>
+             <mat-error *ngIf="username?.errors?.required">nom d'utilisateur est un champ obligatoire</mat-error>
+           </mat-form-field>
+           
+          <mat-form-field>
+           <input matInput name="password" type="password" placeholder="mot de passe" #password="ngModel" [(ngModel)]="user.password" required>
+         <mat-error *ngIf="password?.errors?.required"> mot de passe est un champ obligatoire
+ 
+         </mat-error>
+         </mat-form-field>
+       
+
+        </p>
+    </mat-dialog-content>
+  
+    <mat-dialog-actions>
+  
+      <span class="flex-spacer"></span>
+      <button mat-button mat-dialog-close>Annuler</button>
+      <button type="submit" [disabled]="loginform.form.invalid" mat-button class="background-primary text-floral-white">Login</button>
+      <button style="float:right" mat-button type="button" (click)='OpenSignupModal()' class="background-primary text-floral-white">Créer un compte</button>
+  
+    </mat-dialog-actions>
+  
+  </form>

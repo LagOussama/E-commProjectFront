@@ -1,0 +1,77 @@
+<mat-card-header>
+  <mat-card-title>
+    <h2>Ajouter Produit</h2>
+  </mat-card-title>
+</mat-card-header>
+
+<mat-card>
+  <form #formProduit="ngForm" novalidate (ngSubmit)="addProduit()">
+    <mat-dialog-content>
+      <mat-form-field style="width: 100%">
+        <input
+          matInput
+          placeholder="Nom"
+          #libele="ngModel"
+          [(ngModel)]="Produit.designation"
+          name="libele"
+          required
+        />
+        <mat-error *ngIf="libele?.errors?.required"
+          >libele est un champ obligatoire</mat-error
+        >
+      </mat-form-field>
+
+      
+
+      <mat-form-field style="width: 100%">
+        <input
+          matInput
+          placeholder="prix"
+          #prix="ngModel"
+          [(ngModel)]="Produit.price"
+          type="number"
+          name="prix"
+          required
+        />
+        <mat-error *ngIf="prix?.errors?.required"
+          >prix est un champ obligatoire</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field style="width: 100%">
+        <input
+          matInput
+          placeholder="description"
+          #description="ngModel"
+          [(ngModel)]="Produit.description"
+          name="description"
+          required
+        />
+        <mat-error *ngIf="description?.errors?.required"
+          >description est un champ obligatoire</mat-error
+        >
+      </mat-form-field>
+      <mat-label>Categorie</mat-label>
+      <select matNativeControl  [(ngModel)]="selectedCategorie" required name='selectedCategorie'>
+          <option label="Parcourir les categories"></option>
+         <option *ngFor="let q of categories"  [value]="q.id"  >
+           {{q.categoryName}}
+         </option>
+       </select>
+
+      
+
+      
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button mat-button type="submit"  [disabled]="formProduit.form.invalid">
+        Ajouter Produit
+      </button>
+
+      <button mat-button mat-dialog-close>
+        Annuler
+      </button>
+    </mat-dialog-actions>
+  </form>
+</mat-card>

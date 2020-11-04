@@ -1,0 +1,111 @@
+<mat-sidenav-container class="sidenav-container">
+  
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+      
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" 
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async)">
+   
+  <mat-nav-list>
+    <a mat-list-item >Menu</a>
+
+     <a mat-list-item routerLink="/shoplist" routerLinkActive="active"  > 
+        <span   matBadge={{nbr}} matBadgeColor="warn" class="fas fa-shopping-cart fa-lg">  
+        </span> Panier </a>
+  
+  
+      <a mat-list-item   (click)='openLogin()' *ngIf="!userservice.isLoggedIn()"  >
+        <span  class="fas fa-sign-in-alt fa-lg">
+        </span> login</a>
+  
+     <a mat-list-item  routerLink="/commandes" routerLinkActive="active" *ngIf="userservice.isLoggedIn() && !userservice.isAdmin()"  >
+      <span  class="fas fa-archive fa-lg">
+      </span> Commandes</a>
+
+      <a mat-list-item    routerLink="/admin/commandes" routerLinkActive="active" *ngIf="userservice.isLoggedIn() && userservice.isAdmin()"  >
+        <span class="fas fa-archive fa-lg">
+        </span> Commandes</a>
+
+     <a mat-list-item  routerLink="/admin/categories"  *ngIf="userservice.isAdmin()"  >
+      <span   class="fas fa-archive fa-lg"></span> Gestion Categories</a>
+      <a mat-list-item  routerLink="/admin/produits" *ngIf="userservice.isAdmin()" routerLinkActive="active" >
+        <span  class="fas fa-archive fa-lg"></span> Gestion Produits</a>
+    <a mat-list-item  (click)='logout()' *ngIf="userservice.isLoggedIn()"   >
+      <span  class="fas fa-sign-out-alt fa-lg"></span> log out</a>
+      
+  
+  </mat-nav-list>
+  </mat-sidenav> 
+
+  <mat-sidenav-content>
+    <mat-toolbar style="background-color: #232f3d ; height:80px"   >
+     <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      
+    <div fxLayoutGap="20px">
+      <a style="color : white" [routerLink]="[ '/categories' ]" routerLinkActive="active">Pharmacie en ligne</a>
+      <span>
+        <mat-form-field *ngIf="!(isHandset$ | async)" style="color : white">
+          <mat-label >categories</mat-label>
+            <select matNativeControl (change)="getProducts()" placeholder="categories" [(ngModel)]="selectedCategorie" name='selectedCategorie'>
+                <option label="Parcourir les categories"></option>
+               <option *ngFor="let q of categories"  [value]="q.id"  >
+                 {{q.categoryName}}
+               </option>
+             </select>
+      </mat-form-field>
+      </span>
+      <mat-form-field *ngIf="!(isHandset$ | async)" style="color : white" >
+         
+        <input  matInput
+         id="testInput" autocomplete="off"
+         type="text" #searchText
+         name="searchFilterText" 
+         value="" 
+         (click)="onclick()"
+         (keyup)= "onchange()"
+         placeholder="Chercher par nom produit">
+        </mat-form-field>
+    </div>
+      <span class="flex-spacer"></span>
+    
+    
+<span *ngIf="!(isHandset$ | async)"  >
+  
+  
+    <a mat-button style="color : white" routerLink="/shoplist" routerLinkActive="active"  > <span  style="color : white" matBadge={{nbr}} matBadgeColor="warn" class="fas fa-shopping-cart fa-lg">  </span></a>
+  
+  
+      <a mat-button style="color : white" (click)='openLogin()' *ngIf="!userservice.isLoggedIn()"  ><span  style="color : white" class="fas fa-sign-in-alt fa-lg"></span> login</a>
+  
+     <a mat-button  style="color : white" routerLink="/commandes" routerLinkActive="active" *ngIf="userservice.isLoggedIn() && !userservice.isAdmin()"  ><span style="color : white" class="fas fa-archive fa-lg"></span> Commandes</a>
+
+      <a mat-button style="color : white" routerLink="/admin/commandes" routerLinkActive="active" *ngIf="userservice.isLoggedIn() && userservice.isAdmin()"  ><span style="color : white" class="fas fa-archive fa-lg"></span> Commandes</a>
+
+   <a mat-button  style="color : white" routerLink="/admin/categories"  *ngIf="userservice.isAdmin()"  ><span  style="color : white" class="fas fa-archive fa-lg"></span> Gestion Categories</a>
+
+   <a mat-button  style="color : white" routerLink="/superadmin/user"  *ngIf="userservice.isSuperAdmin()"  ><span  style="color : white" class="fas fa-archive fa-lg"></span> Gesion des utilisateurs</a>
+      
+      
+    <a mat-button style="color : white" routerLink="/admin/produits" *ngIf="userservice.isAdmin()" routerLinkActive="active" ><span style="color : white" class="fas fa-archive fa-lg"></span> Gestion Produits</a>
+    <a mat-button style="color : white" (click)='logout()' *ngIf="userservice.isLoggedIn()"   ><span x style="color : white" class="fas fa-sign-out-alt fa-lg"></span> log out</a>
+
+  </span>
+    </mat-toolbar>
+
+
+    <router-outlet></router-outlet>
+
+  </mat-sidenav-content>
+
+
+  </mat-sidenav-container>
+  <app-footer></app-footer>
+    
+
